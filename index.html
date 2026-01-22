@@ -50,71 +50,72 @@ input {
 
 <script>
 // =========================
-// PRODUITS + CONDITIONNEMENT
+// PRODUITS AVEC CONDITIONNEMENT
 // =========================
 const data = {
+
 "FÛTS": [
-  { nom: "FUT 30 LT SAINT OMER", cond: "30L" },
-  { nom: "FUT 20 LT GOUDALE BLANC", cond: "20L" },
-  { nom: "FUT 20 LT GOUDALE IPA", cond: "20L" },
-  { nom: "FUT 20 LT LIMONADE GOUDALE", cond: "20L" },
+  { nom: "FUT 30 LT SAINT OMER", cond: "30 L" },
+  { nom: "FUT 20 LT GOUDALE BLANC", cond: "20 L" },
+  { nom: "FUT 20 LT GOUDALE IPA", cond: "20 L" },
+  { nom: "FUT 20 LT LIMONADE GOUDALE", cond: "20 L" },
   { nom: "TUBE CO2 10KG", cond: "10 KG" }
 ],
 
 "VINS & BULLES": [
-  { nom: "CHAMPAGNE H BEAUGRAND", cond: "75CL X6" },
-  { nom: "PROSECCO RICCADONNA", cond: "75CL X6" },
-  { nom: "PIVE ROSE DOMAINE", cond: "75CL" },
-  { nom: "CHARDONNAY", cond: "75CL" },
-  { nom: "CHABLIS", cond: "75CL" },
-  { nom: "LA TERRIENNE BLANC", cond: "75CL" },
-  { nom: "LOUP BERGERIE ROUGE", cond: "75CL" },
-  { nom: "SANS CHICHI ROUGE", cond: "75CL" }
+  { nom: "CHAMPAGNE H BEAUGRAND", cond: "75 CL X6" },
+  { nom: "PROSECCO RICCADONNA", cond: "75 CL X6" },
+  { nom: "PIVE ROSE DOMAINE", cond: "75 CL" },
+  { nom: "CHARDONNAY", cond: "75 CL" },
+  { nom: "CHABLIS", cond: "75 CL" },
+  { nom: "LA TERRIENNE BLANC", cond: "75 CL" },
+  { nom: "LOUP BERGERIE ROUGE", cond: "75 CL" },
+  { nom: "SANS CHICHI ROUGE", cond: "75 CL" }
 ],
 
 "ALCOOLS FORTS": [
-  { nom: "GIN GORDONS", cond: "70CL" },
-  { nom: "RHUM 3 RIVIERES", cond: "70CL" },
-  { nom: "CAPTAIN MORGAN GOLD", cond: "70CL" },
-  { nom: "CAPTAIN MORGAN BLANC", cond: "70CL" },
-  { nom: "VODKA SMIRNOFF", cond: "70CL" },
-  { nom: "GET 27", cond: "1L" },
-  { nom: "JOHNNIE WALKER RED", cond: "70CL" },
-  { nom: "ABSOLUT", cond: "70CL" }
+  { nom: "GIN GORDONS", cond: "70 CL" },
+  { nom: "RHUM 3 RIVIERES", cond: "70 CL" },
+  { nom: "CAPTAIN MORGAN GOLD", cond: "70 CL" },
+  { nom: "CAPTAIN MORGAN BLANC", cond: "70 CL" },
+  { nom: "VODKA SMIRNOFF", cond: "70 CL" },
+  { nom: "GET 27", cond: "1 L" },
+  { nom: "JOHNNIE WALKER RED", cond: "70 CL" },
+  { nom: "ABSOLUT", cond: "70 CL" }
 ],
 
 "SOFTS": [
-  { nom: "CARLSBERG", cond: "33CL X24" },
-  { nom: "COCA COLA", cond: "33CL X24" },
-  { nom: "COCA ZERO", cond: "33CL X24" },
-  { nom: "EAU NEUVE", cond: "50CL X12" },
-  { nom: "ICE TEA", cond: "33CL X24" },
+  { nom: "CARLSBERG", cond: "33 CL X24" },
+  { nom: "COCA COLA", cond: "33 CL X24" },
+  { nom: "COCA ZERO", cond: "33 CL X24" },
+  { nom: "EAU NEUVE", cond: "50 CL X12" },
+  { nom: "ICE TEA", cond: "33 CL X24" },
   { nom: "PERRIER 75CL", cond: "X12" },
   { nom: "PERRIER 33CL", cond: "X24" },
-  { nom: "RED BULL", cond: "25CL X24" },
-  { nom: "SAN PELLEGRINO", cond: "75CL X12" },
-  { nom: "ACQUA PANNA", cond: "75CL X12" }
+  { nom: "RED BULL", cond: "25 CL X24" },
+  { nom: "SAN PELLEGRINO", cond: "75 CL X12" },
+  { nom: "ACQUA PANNA", cond: "75 CL X12" }
 ],
 
 "AUTRES": [
-  { nom: "A.MILLIAT (TOUS)", cond: "BOUTEILLE" },
-  { nom: "BRIQUES (TOUTES)", cond: "1L X8" },
-  { nom: "MONIN (TOUS)", cond: "1L / 70CL" },
+  { nom: "A.MILLIAT", cond: "BOUTEILLE" },
+  { nom: "BRIQUES", cond: "1 L X8" },
+  { nom: "MONIN", cond: "1 L / 70 CL" },
   { nom: "INFUSION CITRON GINGEMBRE", cond: "X24" },
   { nom: "INFUSION FRAMBOISE MENTHE", cond: "X24" },
-  { nom: "LDP PARIS GINGER BEER BIO", cond: "75CL" },
-  { nom: "MARTINI BLANC", cond: "1L" },
-  { nom: "MARTINI ROUGE", cond: "1L" },
-  { nom: "JADE", cond: "25CL X24" },
+  { nom: "LDP PARIS GINGER BEER BIO", cond: "75 CL" },
+  { nom: "MARTINI BLANC", cond: "1 L" },
+  { nom: "MARTINI ROUGE", cond: "1 L" },
+  { nom: "JADE", cond: "25 CL X24" },
   { nom: "SUCRE BUCHETTES", cond: "600 PCS" },
   { nom: "CAFE GOURMET", cond: "1 KG" }
 ]
 };
 
 // =========================
-// RÈGLES DE COMMANDE
+// OBJECTIFS (STOCK CIBLE)
 // =========================
-function quantiteAuto(nom) {
+function objectifProduit(nom) {
   if (nom.includes("SAINT OMER")) return 24;
   if (nom.includes("GOUDALE BLANC")) return 15;
   if (nom.includes("GOUDALE IPA")) return 15;
@@ -127,7 +128,7 @@ function quantiteAuto(nom) {
   if (nom.includes("CHARDONNAY")) return 35;
   if (nom.includes("CHABLIS")) return 15;
   if (nom.includes("TERRIENNE")) return 10;
-  if (nom.includes("LOUP BERGERIE ROUGE")) return 2;
+  if (nom.includes("LOUP BERGERIE ROUGE")) return 20;
   if (nom.includes("SANS CHICHI")) return 6;
 
   if (nom.includes("GIN")) return 6;
@@ -161,7 +162,7 @@ function quantiteAuto(nom) {
   if (nom.includes("SUCRE")) return 2;
   if (nom.includes("CAFE")) return 4;
 
-  return 0;
+  return null;
 }
 
 // =========================
@@ -205,15 +206,14 @@ for (const cat in data) {
 function calculer() {
   document.querySelectorAll("tbody tr").forEach(tr => {
     const nom = tr.children[0].textContent;
-    const stock = Number(tr.querySelector("input").value);
-    const qte = stock === 0 ? quantiteAuto(nom) : 0;
-    tr.querySelector(".commande").textContent = qte;
+    const stock = Number(tr.querySelector("input").value) || 0;
+    const objectif = objectifProduit(nom);
+    const aCommander = objectif !== null ? Math.max(0, objectif - stock) : 0;
+    tr.querySelector(".commande").textContent = aCommander;
   });
 }
 
-// recalcul à chaque saisie
 document.addEventListener("input", calculer);
-// calcul au chargement
 calculer();
 </script>
 
