@@ -2,43 +2,103 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>Commande COMO</title>
 
 <style>
+:root {
+  --bg: #f2f2f7;
+  --card: #ffffff;
+  --primary: #111;
+  --accent: #d32f2f;
+  --border: #e0e0e0;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #f4f4f4;
   margin: 0;
-  padding: 10px;
+  padding: 12px;
+  background: var(--bg);
+  font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
-h1 { text-align: center; }
-h2 {
-  background: #222;
-  color: #fff;
-  padding: 8px;
-  margin-top: 25px;
-  font-size: 16px;
+
+h1 {
+  text-align: center;
+  margin: 10px 0 15px;
 }
-table {
+
+button {
   width: 100%;
-  border-collapse: collapse;
-  background: white;
+  padding: 14px;
+  font-size: 17px;
+  font-weight: 600;
+  border-radius: 14px;
+  border: none;
+  background: var(--primary);
+  color: white;
+  margin-bottom: 14px;
 }
-th, td {
-  padding: 8px;
-  border-bottom: 1px solid #ddd;
+
+section {
+  margin-bottom: 22px;
+}
+
+h2 {
+  font-size: 16px;
+  margin: 8px 0;
+  padding-left: 6px;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 80px 70px;
+  gap: 6px;
+  padding: 10px;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.prod {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.cond {
+  font-size: 12px;
+  color: #666;
+}
+
+.stock input {
+  width: 100%;
+  padding: 6px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
   text-align: center;
 }
-th { background: #eee; }
-td:first-child { text-align: left; }
-input {
-  width: 60px;
+
+.cmd {
+  font-size: 17px;
+  font-weight: 700;
   text-align: center;
 }
-.commande {
-  font-weight: bold;
-  color: #c00000;
+
+.cmd.active {
+  color: var(--accent);
+}
+
+.hidden {
+  display: none !important;
 }
 </style>
 </head>
@@ -46,171 +106,166 @@ input {
 <body>
 
 <h1>Commande COMO</h1>
+<button onclick="toggleCommande()">Afficher uniquement la commande</button>
+
 <div id="app"></div>
 
 <script>
-// =========================
-// PRODUITS AVEC CONDITIONNEMENT
-// =========================
+// =======================
+// PRODUITS
+// =======================
 const data = {
-
 "FÛTS": [
-  { nom: "FUT 30 LT SAINT OMER", cond: "30 L" },
-  { nom: "FUT 20 LT GOUDALE BLANC", cond: "20 L" },
-  { nom: "FUT 20 LT GOUDALE IPA", cond: "20 L" },
-  { nom: "FUT 20 LT LIMONADE GOUDALE", cond: "20 L" },
-  { nom: "TUBE CO2 10KG", cond: "10 KG" }
+  { nom:"FUT 30 LT SAINT OMER", cond:"30L" },
+  { nom:"FUT 20 LT GOUDALE BLANC", cond:"20L" },
+  { nom:"FUT 20 LT GOUDALE IPA", cond:"20L" },
+  { nom:"FUT 20 LT LIMONADE GOUDALE", cond:"20L" },
+  { nom:"TUBE CO2 10KG", cond:"10KG" }
 ],
 
 "VINS & BULLES": [
-  { nom: "CHAMPAGNE H BEAUGRAND", cond: "75 CL X6" },
-  { nom: "PROSECCO RICCADONNA", cond: "75 CL X6" },
-  { nom: "PIVE ROSE DOMAINE", cond: "75 CL" },
-  { nom: "CHARDONNAY", cond: "75 CL" },
-  { nom: "CHABLIS", cond: "75 CL" },
-  { nom: "LA TERRIENNE BLANC", cond: "75 CL" },
-  { nom: "LOUP BERGERIE ROUGE", cond: "75 CL" },
-  { nom: "SANS CHICHI ROUGE", cond: "75 CL" }
+  { nom:"CHAMPAGNE H BEAUGRAND", cond:"75CL X6" },
+  { nom:"PROSECCO RICCADONNA", cond:"75CL X6" },
+  { nom:"PIVE ROSE DOMAINE", cond:"75CL" },
+  { nom:"CHARDONNAY", cond:"75CL" },
+  { nom:"CHABLIS", cond:"75CL" },
+  { nom:"LA TERRIENNE BLANC", cond:"75CL" },
+  { nom:"LOUP BERGERIE ROUGE", cond:"75CL" },
+  { nom:"SANS CHICHI ROUGE", cond:"75CL" }
 ],
 
 "ALCOOLS FORTS": [
-  { nom: "GIN GORDONS", cond: "70 CL" },
-  { nom: "RHUM 3 RIVIERES", cond: "70 CL" },
-  { nom: "CAPTAIN MORGAN GOLD", cond: "70 CL" },
-  { nom: "CAPTAIN MORGAN BLANC", cond: "70 CL" },
-  { nom: "VODKA SMIRNOFF", cond: "70 CL" },
-  { nom: "GET 27", cond: "1 L" },
-  { nom: "JOHNNIE WALKER RED", cond: "70 CL" },
-  { nom: "ABSOLUT", cond: "70 CL" }
+  { nom:"GIN GORDONS", cond:"70CL" },
+  { nom:"RHUM 3 RIVIERES", cond:"70CL" },
+  { nom:"CAPTAIN MORGAN GOLD", cond:"70CL" },
+  { nom:"CAPTAIN MORGAN BLANC", cond:"70CL" },
+  { nom:"VODKA SMIRNOFF", cond:"70CL" },
+  { nom:"GET 27", cond:"1L" },
+  { nom:"JOHNNIE WALKER RED", cond:"70CL" },
+  { nom:"ABSOLUT", cond:"70CL" }
 ],
 
 "SOFTS": [
-  { nom: "CARLSBERG", cond: "33 CL X24" },
-  { nom: "COCA COLA", cond: "33 CL X24" },
-  { nom: "COCA ZERO", cond: "33 CL X24" },
-  { nom: "EAU NEUVE", cond: "50 CL X12" },
-  { nom: "ICE TEA", cond: "33 CL X24" },
-  { nom: "PERRIER 75CL", cond: "X12" },
-  { nom: "PERRIER 33CL", cond: "X24" },
-  { nom: "RED BULL", cond: "25 CL X24" },
-  { nom: "SAN PELLEGRINO", cond: "75 CL X12" },
-  { nom: "ACQUA PANNA", cond: "75 CL X12" }
+  { nom:"CARLSBERG", cond:"33CL X24" },
+  { nom:"COCA COLA", cond:"33CL X24" },
+  { nom:"COCA ZERO", cond:"33CL X24" },
+  { nom:"EAU NEUVE", cond:"50CL X12" },
+  { nom:"ICE TEA", cond:"33CL X24" },
+  { nom:"PERRIER 75CL", cond:"X12" },
+  { nom:"PERRIER 33CL", cond:"X24" },
+  { nom:"RED BULL", cond:"25CL X24" },
+  { nom:"SAN PELLEGRINO", cond:"75CL X12" },
+  { nom:"ACQUA PANNA", cond:"75CL X12" }
 ],
 
 "AUTRES": [
-  { nom: "A.MILLIAT", cond: "BOUTEILLE" },
-  { nom: "BRIQUES", cond: "1 L X8" },
-  { nom: "MONIN", cond: "1 L / 70 CL" },
-  { nom: "INFUSION CITRON GINGEMBRE", cond: "X24" },
-  { nom: "INFUSION FRAMBOISE MENTHE", cond: "X24" },
-  { nom: "LDP PARIS GINGER BEER BIO", cond: "75 CL" },
-  { nom: "MARTINI BLANC", cond: "1 L" },
-  { nom: "MARTINI ROUGE", cond: "1 L" },
-  { nom: "JADE", cond: "25 CL X24" },
-  { nom: "SUCRE BUCHETTES", cond: "600 PCS" },
-  { nom: "CAFE GOURMET", cond: "1 KG" }
+  { nom:"A.MILLIAT", cond:"Bouteille" },
+  { nom:"BRIQUES", cond:"1L X8" },
+  { nom:"MONIN", cond:"1L / 70CL" },
+  { nom:"INFUSION CITRON GINGEMBRE", cond:"X24" },
+  { nom:"INFUSION FRAMBOISE MENTHE", cond:"X24" },
+  { nom:"LDP PARIS GINGER BEER BIO", cond:"75CL" },
+  { nom:"MARTINI BLANC", cond:"1L" },
+  { nom:"MARTINI ROUGE", cond:"1L" },
+  { nom:"JADE", cond:"25CL X24" },
+  { nom:"SUCRE BUCHETTES", cond:"600 pcs" },
+  { nom:"CAFE GOURMET", cond:"1KG" }
 ]
 };
 
-// =========================
-// OBJECTIFS (STOCK CIBLE)
-// =========================
-function objectifProduit(nom) {
-  if (nom.includes("SAINT OMER")) return 24;
-  if (nom.includes("GOUDALE BLANC")) return 15;
-  if (nom.includes("GOUDALE IPA")) return 15;
-  if (nom.includes("LIMONADE GOUDALE")) return 4;
-  if (nom.includes("CO2")) return 3;
-
-  if (nom.includes("BEAUGRAND")) return 6;
-  if (nom.includes("PROSECCO")) return 15;
-  if (nom.includes("PIVE ROSE")) return 30;
-  if (nom.includes("CHARDONNAY")) return 35;
-  if (nom.includes("CHABLIS")) return 15;
-  if (nom.includes("TERRIENNE")) return 10;
-  if (nom.includes("LOUP BERGERIE ROUGE")) return 20;
-  if (nom.includes("SANS CHICHI")) return 6;
-
-  if (nom.includes("GIN")) return 6;
-  if (nom.includes("3 RIVIERES")) return 6;
-  if (nom.includes("CAPTAIN MORGAN GOLD")) return 10;
-  if (nom.includes("CAPTAIN MORGAN BLANC")) return 10;
-  if (nom.includes("SMIRNOFF")) return 10;
-  if (nom.includes("GET 27")) return 4;
-  if (nom.includes("JOHNNIE")) return 6;
-  if (nom.includes("ABSOLUT")) return 5;
-
-  if (nom.includes("CARLSBERG")) return 8;
-  if (nom.includes("COCA COLA")) return 20;
-  if (nom.includes("COCA ZERO")) return 20;
-  if (nom.includes("EAU NEUVE")) return 15;
-  if (nom.includes("ICE TEA")) return 4;
-  if (nom.includes("PERRIER 75")) return 7;
-  if (nom.includes("PERRIER 33")) return 15;
-  if (nom.includes("RED BULL")) return 12;
-  if (nom.includes("SAN PELLEGRINO")) return 2;
-  if (nom.includes("ACQUA PANNA")) return 2;
-
-  if (nom.includes("A.MILLIAT")) return 1;
-  if (nom.includes("BRIQUES")) return 2;
-  if (nom.includes("MONIN")) return 1;
-  if (nom.includes("INFUSION CITRON")) return 2;
-  if (nom.includes("INFUSION FRAMBOISE")) return 1;
-  if (nom.includes("GINGER BEER")) return 4;
-  if (nom.includes("MARTINI")) return 1;
-  if (nom.includes("JADE")) return 2;
-  if (nom.includes("SUCRE")) return 2;
-  if (nom.includes("CAFE")) return 4;
-
+// =======================
+// OBJECTIFS
+// =======================
+function objectif(n) {
+  if (n.includes("SAINT OMER")) return 24;
+  if (n.includes("GOUDALE BLANC")) return 15;
+  if (n.includes("GOUDALE IPA")) return 15;
+  if (n.includes("LIMONADE")) return 4;
+  if (n.includes("CO2")) return 3;
+  if (n.includes("BEAUGRAND")) return 6;
+  if (n.includes("PROSECCO")) return 15;
+  if (n.includes("PIVE ROSE")) return 30;
+  if (n.includes("CHARDONNAY")) return 35;
+  if (n.includes("CHABLIS")) return 15;
+  if (n.includes("TERRIENNE")) return 10;
+  if (n.includes("LOUP BERGERIE ROUGE")) return 20;
+  if (n.includes("SANS CHICHI")) return 6;
+  if (n.includes("GIN")) return 6;
+  if (n.includes("3 RIVIERES")) return 6;
+  if (n.includes("CAPTAIN MORGAN GOLD")) return 10;
+  if (n.includes("CAPTAIN MORGAN BLANC")) return 10;
+  if (n.includes("SMIRNOFF")) return 10;
+  if (n.includes("GET 27")) return 4;
+  if (n.includes("JOHNNIE")) return 6;
+  if (n.includes("ABSOLUT")) return 5;
+  if (n.includes("CARLSBERG")) return 8;
+  if (n.includes("COCA COLA")) return 20;
+  if (n.includes("COCA ZERO")) return 20;
+  if (n.includes("EAU NEUVE")) return 15;
+  if (n.includes("ICE TEA")) return 4;
+  if (n.includes("PERRIER 75")) return 7;
+  if (n.includes("PERRIER 33")) return 15;
+  if (n.includes("RED BULL")) return 12;
+  if (n.includes("SAN PELLEGRINO")) return 2;
+  if (n.includes("ACQUA PANNA")) return 2;
+  if (n.includes("A.MILLIAT")) return 1;
+  if (n.includes("BRIQUES")) return 2;
+  if (n.includes("MONIN")) return 1;
+  if (n.includes("INFUSION CITRON")) return 2;
+  if (n.includes("INFUSION FRAMBOISE")) return 1;
+  if (n.includes("GINGER BEER")) return 4;
+  if (n.includes("MARTINI")) return 1;
+  if (n.includes("JADE")) return 2;
+  if (n.includes("SUCRE")) return 2;
+  if (n.includes("CAFE")) return 4;
   return null;
 }
 
-// =========================
-// UI + CALCUL
-// =========================
+// =======================
+// UI
+// =======================
+let showOnlyCmd = false;
 const app = document.getElementById("app");
 
 for (const cat in data) {
-  const h2 = document.createElement("h2");
-  h2.textContent = cat;
-  app.appendChild(h2);
-
-  const table = document.createElement("table");
-  table.innerHTML = `
-    <thead>
-      <tr>
-        <th>Produit</th>
-        <th>Conditionnement</th>
-        <th>Stock</th>
-        <th>À commander</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  `;
-  app.appendChild(table);
-
-  const tbody = table.querySelector("tbody");
+  const section = document.createElement("section");
+  section.innerHTML = `<h2>${cat}</h2><div class="card"></div>`;
+  const card = section.querySelector(".card");
 
   data[cat].forEach(p => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${p.nom}</td>
-      <td>${p.cond}</td>
-      <td><input type="number" min="0" value="0"></td>
-      <td class="commande">0</td>
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML = `
+      <div>
+        <div class="prod">${p.nom}</div>
+        <div class="cond">${p.cond}</div>
+      </div>
+      <div class="stock"><input type="number" min="0" value="0"></div>
+      <div class="cmd">0</div>
     `;
-    tbody.appendChild(tr);
+    card.appendChild(row);
   });
+
+  app.appendChild(section);
 }
 
 function calculer() {
-  document.querySelectorAll("tbody tr").forEach(tr => {
-    const nom = tr.children[0].textContent;
-    const stock = Number(tr.querySelector("input").value) || 0;
-    const objectif = objectifProduit(nom);
-    const aCommander = objectif !== null ? Math.max(0, objectif - stock) : 0;
-    tr.querySelector(".commande").textContent = aCommander;
+  document.querySelectorAll(".row").forEach(row => {
+    const nom = row.querySelector(".prod").textContent;
+    const stock = Number(row.querySelector("input").value) || 0;
+    const obj = objectif(nom);
+    const cmd = obj !== null ? Math.max(0, obj - stock) : 0;
+
+    const cmdEl = row.querySelector(".cmd");
+    cmdEl.textContent = cmd;
+    cmdEl.classList.toggle("active", cmd > 0);
+    row.classList.toggle("hidden", showOnlyCmd && cmd === 0);
   });
+}
+
+function toggleCommande() {
+  showOnlyCmd = !showOnlyCmd;
+  calculer();
 }
 
 document.addEventListener("input", calculer);
