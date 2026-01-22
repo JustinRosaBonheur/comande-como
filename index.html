@@ -20,16 +20,9 @@ h2 {
   margin-top: 25px;
   font-size: 16px;
 }
-button {
-  width: 100%;
-  padding: 12px;
-  font-size: 16px;
-  margin: 10px 0;
-}
 table {
   width: 100%;
   border-collapse: collapse;
-  table-layout: fixed;
   background: white;
 }
 th, td {
@@ -47,188 +40,142 @@ input { width: 60px; text-align: center; }
 <body>
 
 <h1>Commande COMO</h1>
-<button onclick="toggleCommande()">Voir uniquement la commande</button>
-
 <div id="app"></div>
 
 <script>
 // =========================
-// LISTE COMPLÈTE DES PRODUITS (ORIGINALE)
+// PRODUITS (LISTE COMPLÈTE)
 // =========================
 const data = {
-
-"JUS": [
-"A.MILLIAT CITRONNADE GINGEMBRE",
-"A.MILLIAT FRAISE 33CLS VP X12",
-"A.MILLIAT JUS ORANGE 1LT VP X6",
-"A.MILLIAT JUS POMME 1LT VP X6",
-"A.MILLIAT MANGUE 33CLS VP X12",
-"A.MILLIAT ORANGE 33CLS VP X12",
-"A.MILLIAT PECHE JAUNE 1LT VP X6",
-"A.MILLIAT PECHE VIGNE 33CLS VP X12",
-"A.MILLIAT POMME COX 33CLS VP X12",
-"A.MILLIAT TOMATE CRIMÉE 33CLS VP X12",
-"BRIQUE ANANAS 1LT X8",
-"BRIQUE MULTIFRUIT 1LT X8",
-"BRIQUE ORANGE 1LT X8",
-"BRIQUE PAMPLEMOUSSE 1LT X8",
-"BRIQUE POMME 1LT X8"
-],
-
-"SOFTS": [
-"ACQUA PANNA 75CLS VP X12",
-"AGUA CANA 70CL",
-"BITTER ANGOSTURA 20CLS",
-"BROOKLYN STONEWALL 33CLS X24",
-"CAFÉ GOURMET ORANGE 1KG",
-"CARAIBOS ORANGE 1LT X6",
-"CARAIBOS ANANAS 1LT X6",
-"CARAIBOS CRANBERRY 1LT X6",
-"CARAIBOS GOYAVE 1LT X6",
-"CARAIBOS PAMPLEMOUSSE 1LT X6",
-"CARAIBOS PINA COLADA 1LT X6",
-"CARAIBOS POMME 1LT X6",
-"CARAIBOS TOMATE 1LT X6",
-"CARLSBERG CLUB 33CLS X24",
-"CLUB MATE 33CLS",
-"COCA COLA 33CLS X24",
-"COCA ZERO 33CLS X24",
-"EAU NEUVE PLATE 50CL X12",
-"FANTA ORANGE 33CLS X24",
-"FUZETEA PECHE 33CLS X24",
-"ICE TEA PECHE 33CLS X24",
-"LDP PARIS TONIC BIO 75CLS",
-"PERRIER 75CLS X12",
-"PERRIER 33CLS X24",
-"RED BULL 25CLS X24",
-"SAN PELLEGRINO 75CLS X12",
-"TROPICO 33CLS X24"
-],
-
-"VINS ROUGES": [
-"BEAUJOLAIS 75CL",
-"LA TERRIENNE ROUGE BIO 75CL X6",
-"LOUP BERGERIE ROUGE 75CL X12",
-"SANS CHICHI ROUGE 75CL X6"
-],
-
-"VINS BLANCS": [
-"CHABLIS LAROCHE 75CL X6",
-"LA TERRIENNE BLANC BIO 75CL X6",
-"SARDINE BLANC 75CL X6"
-],
-
-"VINS ROSÉS": [
-"LOUP BERGERIE ROSE 75CL X12",
-"PIVE ROSE MAGNUM 1.5L X3",
-"ROSE DE L'ETE 75CL X6",
-"ROSE DOMAINE PIVE 75CL X12",
-"ROSE DOMAINE PIVE 75CL X6",
-"ROSE PIVE CANETTE 25CLS X24"
-],
-
-"CHAMPAGNE & BULLES": [
-"CHAMPAGNE H BEAUGRAND 75CL X6",
-"PROSECCO RICCADONNA 75CL X6",
-"PIVE BRUT 75CL X6",
-"PET NAT 75CL"
-],
-
-"SIROPS": [
-"MONIN FRAISE 1LT",
-"MONIN FRAMBOISE 1LT",
-"MONIN MANGUE 1LT",
-"MONIN PASSION 1LT",
-"MONIN CANNELLE 70CLS",
-"MONIN CARAMEL 70CLS",
-"MONIN CITRON JAUNE 1LT",
-"MONIN CITRON VERT 70CLS",
-"MONIN GRENADINE 1LT",
-"MONIN KIWI 70CLS",
-"MONIN MELON 1LT",
-"MONIN MIEL 70CLS",
-"MONIN NOISETTE 70CLS",
-"MONIN ORGEAT 1LT",
-"MONIN PECHE 1LT",
-"MONIN VANILLE 70CLS",
-"MONIN VIOLETTE 70CLS",
-"MONIN SUCRE DE CANNE 1LT",
-"SIROP PECHE GUIOT 1LT"
-],
-
 "FÛTS": [
-"FUT 20 LT 1664 BLANC",
-"FUT 20 LT GINGER",
+"FUT 30 LT SAINT OMER",
 "FUT 20 LT GOUDALE BLANC",
 "FUT 20 LT GOUDALE IPA",
 "FUT 20 LT LIMONADE GOUDALE",
-"FUT 20 LT PARISCOLA",
-"FUT 20 LT TONIC BIO",
-"FUT 30 LT LIMONADE ROXANNE",
-"FUT 30 LT SAINT OMER",
-"FUT 6 LT HOEGAARDEN",
 "TUBE CO2 10KG"
 ],
 
-"ALCOOLS FORTS": [
-"GIN GORDONS 70CLS",
-"RHUM 3 RIVIERES BLANC 70CL",
-"RHUM CAPTAIN MORGAN GOLD 70CL",
-"RHUM CAPTAIN MORGAN WHITE 70CL",
-"VODKA SMIRNOFF 70CL",
-"GET 27 1LT",
-"KAHLUA 70CL",
-"TRIPLE SEC 70CL"
+"VINS & BULLES": [
+"CHAMPAGNE H BEAUGRAND",
+"PROSECCO RICCADONNA",
+"PIVE ROSE DOMAINE",
+"CHARDONNAY",
+"CHABLIS",
+"LA TERRIENNE BLANC",
+"LOUP BERGERIE ROUGE",
+"SANS CHICHI ROUGE"
 ],
 
-"THÉS & INFUSIONS": [
-"THE EARL GREY X24",
-"THE BREAKFAST X24",
-"THE DARJEELING X24",
-"THE CEYLAN X24",
-"THE VANILLE X24",
-"THE ROOIBOS X24",
+"ALCOOLS FORTS": [
+"GIN GORDONS",
+"RHUM 3 RIVIERES",
+"CAPTAIN MORGAN GOLD",
+"CAPTAIN MORGAN BLANC",
+"VODKA SMIRNOFF",
+"GET 27",
+"JOHNNIE WALKER RED",
+"ABSOLUT"
+],
+
+"SOFTS": [
+"CARLSBERG",
+"COCA COLA",
+"COCA ZERO",
+"EAU NEUVE",
+"ICE TEA",
+"PERRIER 75CL",
+"PERRIER 33CL",
+"RED BULL",
+"SAN PELLEGRINO",
+"ACQUA PANNA"
+],
+
+"JUS & SIROPS": [
+"A.MILLIAT ORANGE",
+"A.MILLIAT POMME",
+"A.MILLIAT PECHE",
+"A.MILLIAT MANGUE",
+"BRIQUE ORANGE",
+"BRIQUE POMME",
+"MONIN FRAISE",
+"MONIN VANILLE",
+"MONIN CARAMEL"
+],
+
+"AUTRES": [
 "INFUSION CITRON GINGEMBRE",
-"INFUSION FRAMBOISE MENTHE"
+"INFUSION FRAMBOISE MENTHE",
+"LDP PARIS GINGER BEER",
+"MARTINI BLANC",
+"MARTINI ROUGE",
+"JADE",
+"SUCRE BUCHETTES",
+"CAFE GOURMET"
 ]
 };
 
 // =========================
-// OBJECTIFS (SEULEMENT CEUX À CALCULER)
+// RÈGLES DE COMMANDE
 // =========================
-const objectifs = {
-"FUT 30 LT SAINT OMER": 24,
-"FUT 20 LT GOUDALE BLANC": 15,
-"FUT 20 LT GOUDALE IPA": 15,
-"FUT 20 LT LIMONADE GOUDALE": 4,
-"TUBE CO2 10KG": 3,
+function regleCommande(produit) {
 
-"CHAMPAGNE H BEAUGRAND 75CL X6": 6,
-"PROSECCO RICCADONNA 75CL X6": 15,
+  // FÛTS
+  if (produit.includes("SAINT OMER")) return 24;
+  if (produit.includes("GOUDALE BLANC")) return 15;
+  if (produit.includes("GOUDALE IPA")) return 15;
+  if (produit.includes("LIMONADE GOUDALE")) return 4;
+  if (produit.includes("CO2")) return 3;
 
-"GIN GORDONS 70CLS": 6,
-"RHUM 3 RIVIERES BLANC 70CL": 6,
-"RHUM CAPTAIN MORGAN GOLD 70CL": 10,
-"RHUM CAPTAIN MORGAN WHITE 70CL": 10,
-"VODKA SMIRNOFF 70CL": 10,
-"GET 27 1LT": 4,
+  // BULLES & VINS
+  if (produit.includes("BEAUGRAND")) return 6;
+  if (produit.includes("PROSECCO")) return 15;
+  if (produit.includes("PIVE ROSE")) return 30;
+  if (produit.includes("CHARDONNAY")) return 35;
+  if (produit.includes("CHABLIS")) return 15;
+  if (produit.includes("TERRIENNE")) return 10;
+  if (produit.includes("LOUP BERGERIE ROUGE")) return 2;
+  if (produit.includes("SANS CHICHI")) return 6;
 
-"CARLSBERG CLUB 33CLS X24": 8,
-"COCA COLA 33CLS X24": 20,
-"COCA ZERO 33CLS X24": 20,
-"EAU NEUVE PLATE 50CL X12": 15,
-"ICE TEA PECHE 33CLS X24": 4,
-"PERRIER 75CLS X12": 7,
-"PERRIER 33CLS X24": 15,
-"RED BULL 25CLS X24": 12,
+  // ALCOOLS
+  if (produit.includes("GIN")) return 6;
+  if (produit.includes("3 RIVIERES")) return 6;
+  if (produit.includes("CAPTAIN MORGAN GOLD")) return 10;
+  if (produit.includes("CAPTAIN MORGAN BLANC")) return 10;
+  if (produit.includes("SMIRNOFF")) return 10;
+  if (produit.includes("GET 27")) return 4;
+  if (produit.includes("JOHNNIE")) return 6;
+  if (produit.includes("ABSOLUT")) return 5;
 
-"LOUP BERGERIE ROUGE 75CL X12": 2
-};
+  // SOFTS
+  if (produit.includes("CARLSBERG")) return 8;
+  if (produit.includes("COCA COLA")) return 20;
+  if (produit.includes("COCA ZERO")) return 20;
+  if (produit.includes("EAU NEUVE")) return 15;
+  if (produit.includes("ICE TEA")) return 4;
+  if (produit.includes("PERRIER 75")) return 7;
+  if (produit.includes("PERRIER 33")) return 15;
+  if (produit.includes("RED BULL")) return 12;
+  if (produit.includes("SAN PELLEGRINO")) return 2;
+  if (produit.includes("ACQUA PANNA")) return 2;
+
+  // RÈGLES GÉNÉRALES
+  if (produit.includes("A.MILLIAT")) return 1;
+  if (produit.includes("BRIQUE")) return 2;
+  if (produit.includes("MONIN")) return 1;
+  if (produit.includes("INFUSION CITRON")) return 2;
+  if (produit.includes("INFUSION FRAMBOISE")) return 1;
+  if (produit.includes("GINGER BEER")) return 4;
+  if (produit.includes("MARTINI")) return 1;
+  if (produit.includes("JADE")) return 2;
+  if (produit.includes("SUCRE")) return 2;
+  if (produit.includes("CAFE")) return 4;
+
+  return 0;
+}
 
 // =========================
-// INTERFACE + CALCUL
+// UI + CALCUL
 // =========================
-let filtre = false;
 const app = document.getElementById("app");
 
 for (const cat in data) {
@@ -262,27 +209,14 @@ for (const cat in data) {
   });
 }
 
-function calculer() {
+document.addEventListener("input", () => {
   document.querySelectorAll("tbody tr").forEach(tr => {
-    const produit = tr.children[0].textContent.trim();
+    const produit = tr.children[0].textContent;
     const stock = Number(tr.querySelector("input").value) || 0;
-
-    let aCommander = 0;
-    if (objectifs[produit] !== undefined) {
-      aCommander = Math.max(0, objectifs[produit] - stock);
-    }
-
-    tr.querySelector(".commande").textContent = aCommander;
-    tr.style.display = aCommander > 0 || !filtre ? "" : "none";
+    const qte = stock === 0 ? regleCommande(produit) : 0;
+    tr.querySelector(".commande").textContent = qte;
   });
-}
-
-function toggleCommande() {
-  filtre = !filtre;
-  calculer();
-}
-
-document.addEventListener("input", calculer);
+});
 </script>
 
 </body>
