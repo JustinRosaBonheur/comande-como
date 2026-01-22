@@ -12,11 +12,7 @@ body {
   margin: 0;
   padding: 10px;
 }
-
-h1 {
-  text-align: center;
-}
-
+h1 { text-align: center; }
 h2 {
   background: #222;
   color: #fff;
@@ -24,45 +20,27 @@ h2 {
   margin-top: 25px;
   font-size: 16px;
 }
-
 button {
   width: 100%;
   padding: 12px;
   font-size: 16px;
   margin: 10px 0;
 }
-
 table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   background: white;
 }
-
 th, td {
   padding: 8px;
   border-bottom: 1px solid #ddd;
   text-align: center;
-  vertical-align: middle;
 }
-
-th {
-  background: #eee;
-}
-
-td:first-child {
-  text-align: left;
-}
-
-input {
-  width: 60px;
-  text-align: center;
-}
-
-.commande {
-  font-weight: bold;
-  color: #c00000;
-}
+th { background: #eee; }
+td:first-child { text-align: left; }
+input { width: 60px; text-align: center; }
+.commande { font-weight: bold; color: #c00000; }
 </style>
 </head>
 
@@ -75,7 +53,7 @@ input {
 
 <script>
 // =========================
-// PRODUITS PAR CATÉGORIE
+// PRODUITS (TOUT AFFICHÉ)
 // =========================
 const data = {
 
@@ -89,15 +67,26 @@ const data = {
 
 "CHAMPAGNE & BULLES": [
   "CHAMPAGNE H BEAUGRAND",
-  "PROSECCO RICCADONNA"
+  "PROSECCO RICCADONNA",
+  "PIVE BRUT",
+  "PET NAT"
 ],
 
-"VINS": [
-  "PIVE ROSE DOMAINE",
-  "CHARDONNAY",
+"VINS ROUGES": [
+  "BEAUJOLAIS",
+  "LOUP BERGERIE ROUGE",
+  "SANS CHICHI ROUGE"
+],
+
+"VINS BLANCS": [
   "CHABLIS",
-  "LA TERRIENNE BLANC",
-  "LOUP BERGERIE ROUGE"
+  "CHARDONNAY",
+  "LA TERRIENNE BLANC"
+],
+
+"VINS ROSÉS": [
+  "PIVE ROSE DOMAINE",
+  "ROSE DE L'ETE"
 ],
 
 "ALCOOLS FORTS": [
@@ -118,30 +107,35 @@ const data = {
   "PERRIER 75CL",
   "PERRIER 33CL",
   "RED BULL"
+],
+
+"AUTRES": [
+  "JUS",
+  "SIROPS",
+  "THES",
+  "DIVERS"
 ]
 };
 
 // =========================
-// SEUILS / QUANTITÉS FIXES
+// SEUILS AUTO (UNIQUEMENT CEUX QUE TU AS DONNÉS)
 // =========================
-const stockCible = {
-  // FÛTS
+const seuils = {
   "FUT 30L SAINT OMER": 24,
   "FUT 20L GOUDALE BLANC": 15,
   "FUT 20L GOUDALE IPA": 15,
   "FUT 20L LIMONADE GOUDALE": 4,
   "TUBE CO2 10KG": 3,
 
-  // BULLES & VINS
   "CHAMPAGNE H BEAUGRAND": 6,
   "PROSECCO RICCADONNA": 15,
+
   "PIVE ROSE DOMAINE": 30,
   "CHARDONNAY": 35,
   "CHABLIS": 15,
   "LA TERRIENNE BLANC": 10,
   "LOUP BERGERIE ROUGE": 2,
 
-  // ALCOOLS FORTS
   "GIN GORDONS": 6,
   "RHUM 3 RIVIERES": 6,
   "CAPTAIN MORGAN GOLD": 10,
@@ -149,7 +143,6 @@ const stockCible = {
   "VODKA SMIRNOFF": 10,
   "GET 27": 4,
 
-  // SOFTS
   "CARLSBERG": 8,
   "COCA COLA": 20,
   "COCA ZERO": 20,
@@ -161,7 +154,7 @@ const stockCible = {
 };
 
 // =========================
-// GÉNÉRATION DE L'INTERFACE
+// UI
 // =========================
 let filtre = false;
 const app = document.getElementById("app");
@@ -198,7 +191,7 @@ for (const cat in data) {
 }
 
 // =========================
-// CALCUL (LOGIQUE TERRAIN)
+// CALCUL (SEULEMENT SI SEUIL EXISTE)
 // =========================
 function calculer() {
   document.querySelectorAll("tbody tr").forEach(tr => {
@@ -206,9 +199,8 @@ function calculer() {
     const stock = +tr.querySelector("input").value;
 
     let aCommander = 0;
-
-    if (stockCible[produit] !== undefined && stock < stockCible[produit]) {
-      aCommander = stockCible[produit];
+    if (seuils[produit] !== undefined && stock < seuils[produit]) {
+      aCommander = seuils[produit];
     }
 
     tr.querySelector(".commande").textContent = aCommander;
