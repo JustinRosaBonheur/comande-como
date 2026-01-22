@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -15,11 +14,10 @@ body {
 }
 h1 {
   text-align: center;
-  margin-bottom: 10px;
 }
 h2 {
   background: #222;
-  color: white;
+  color: #fff;
   padding: 6px;
   margin-top: 20px;
   font-size: 16px;
@@ -27,8 +25,8 @@ h2 {
 table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
   background: white;
+  font-size: 14px;
 }
 th, td {
   padding: 6px;
@@ -50,61 +48,166 @@ button {
   font-size: 16px;
   margin: 10px 0;
 }
-.hidden {
-  display: none;
-}
 </style>
 </head>
 
 <body>
 
 <h1>Commande COMO</h1>
-
 <button onclick="toggleCommande()">Voir uniquement la commande</button>
 
-<div id="contenu"></div>
+<div id="app"></div>
 
 <script>
 const data = {
-  "JUS": [
-    "A.MILLIAT CITRONNADE GINGEMBRE",
-    "A.MILLIAT FRAISE 33CLS VP X12",
-    "A.MILLIAT JUS ORANGE 1LT VP X6",
-    "A.MILLIAT JUS POMME 1LT VP X6",
-    "A.MILLIAT MANGUE 33CLS VP X12",
-    "A.MILLIAT ORANGE 33CLS VP X12"
-  ],
-  "SOFTS": [
-    "COCA COLA 33CLS",
-    "COCA ZERO 33CLS",
-    "PERRIER 75CLS",
-    "SAN PELLEGRINO 75CLS",
-    "RED BULL 25CLS"
-  ],
-  "VINS": [
-    "BEAUJOLAIS 75CL",
-    "CHABLIS 75CL",
-    "ROSÉ DE L'ÉTÉ 75CL"
-  ],
-  "FÛTS": [
-    "FUT 20L 1664 BLANC",
-    "FUT 20L GOUDALE IPA",
-    "FUT 30L SAINT-OMER"
-  ],
-  "ALCOOLS FORTS": [
-    "VODKA SMIRNOFF 70CL",
-    "RHUM CAPTAIN MORGAN",
-    "GIN GORDON'S"
-  ]
+
+"JUS": [
+"A.MILLIAT CITRONNADE GINGEMBRE",
+"A.MILLIAT FRAISE 33CLS VP X12",
+"A.MILLIAT JUS ORANGE 1LT VP X6",
+"A.MILLIAT JUS POMME 1LT VP X6",
+"A.MILLIAT MANGUE 33CLS VP X12",
+"A.MILLIAT ORANGE 33CLS VP X12",
+"A.MILLIAT PECHE JAUNE 1LT VP X6",
+"A.MILLIAT PECHE VIGNE 33CLS VP X12",
+"A.MILLIAT POMME COX 33CLS VP X12",
+"A.MILLIAT TOMATE CRIMEE 33CLS VP X12",
+"BRIQUE ANANAS 1LT X8",
+"BRIQUE MULTIFRUIT 1LT X8",
+"BRIQUE ORANGE 1LT X8",
+"BRIQUE PAMPLEMOUSSE 1LT X8",
+"BRIQUE POMME 1LT X8"
+],
+
+"SOFTS": [
+"ACQUA PANNA 75CLS X12",
+"AGUA CANA 70CL",
+"BITTER ANGOSTURA 20CLS",
+"BROOKLYN STONEWALL 33CLS X24",
+"CARAIBOS ORANGE 1LT X6",
+"CARAIBOS ANANAS 1LT X6",
+"CARAIBOS CRANBERRY 1LT X6",
+"CARAIBOS GOYAVE 1LT X6",
+"CARAIBOS PAMPLEMOUSSE 1LT X6",
+"CARAIBOS PINA COLADA 1LT X6",
+"CARAIBOS POMME 1LT X6",
+"CARAIBOS TOMATE 1LT X6",
+"CARLSBERG CLUB 33CLS X24",
+"CLUB MATE 33CLS",
+"COCA COLA 33CLS X24",
+"COCA ZERO 33CLS X24",
+"EAU PLATE TETRA 50CL X12",
+"FANTA ORANGE 33CLS X24",
+"FUZETEA PECHE 33CLS X24",
+"ICE TEA PECHE 33CLS X24",
+"LDP PARIS TONIC BIO 75CLS",
+"PERRIER 75CLS X12",
+"PERRIER 33CLS X24",
+"RED BULL 25CLS X24",
+"SAN PELLEGRINO 75CLS X12",
+"TROPICO 33CLS X24"
+],
+
+"VINS ROUGES": [
+"BEAUJOLAIS 75CL",
+"LA TERRIENNE ROUGE BIO 75CL X6",
+"LOUP BERGERIE ROUGE 75CL X12",
+"SANS CHICHI ROUGE 75CL X6"
+],
+
+"VINS BLANCS": [
+"CHABLIS LAROCHE 75CL X6",
+"LA TERRIENNE BLANC BIO 75CL X6",
+"SARDINE BLANC 75CL X6"
+],
+
+"VINS ROSÉS": [
+"LOUP BERGERIE ROSE 75CL X12",
+"PIVE ROSE MAGNUM 1.5L X3",
+"ROSE DE L'ETE 75CL X6",
+"ROSE DOMAINE PIVE 75CL X12",
+"ROSE DOMAINE PIVE 75CL X6",
+"ROSE PIVE CANETTE 25CLS X24"
+],
+
+"CHAMPAGNE & BULLES": [
+"CHAMPAGNE H BEAUGRAND 75CL X6",
+"PROSECCO RICCADONNA 75CL X6",
+"PIVE BRUT PETILLANT 75CL X6",
+"PET NAT 75CL"
+],
+
+"SIROPS": [
+"MONIN FRAISE 1LT",
+"MONIN FRAMBOISE 1LT",
+"MONIN MANGUE 1LT",
+"MONIN PASSION 1LT",
+"MONIN CANNELLE 70CLS",
+"MONIN CARAMEL 70CLS",
+"MONIN CITRON JAUNE 1LT",
+"MONIN CITRON VERT 70CLS",
+"MONIN GRENADINE 1LT",
+"MONIN KIWI 70CLS",
+"MONIN MELON 1LT",
+"MONIN MIEL 70CLS",
+"MONIN NOISETTE 70CLS",
+"MONIN ORGEAT 1LT",
+"MONIN PECHE 1LT",
+"MONIN VANILLE 70CLS",
+"MONIN VIOLETTE 70CLS",
+"MONIN SUCRE DE CANNE 1LT",
+"SIROP PECHE GUIOT 1LT"
+],
+
+"FÛTS": [
+"FUT 20L 1664 BLANC",
+"FUT 20L GINGER",
+"FUT 20L GOUDALE BLANC",
+"FUT 20L GOUDALE IPA",
+"FUT 20L LIMONADE GOUDALE",
+"FUT 20L PARISCOLA",
+"FUT 20L TONIC BIO",
+"FUT 30L LIMONADE ROXANNE",
+"FUT 30L SAINT OMER",
+"FUT 6L HOEGAARDEN",
+"TUBE CO2 10KG"
+],
+
+"ALCOOLS FORTS": [
+"GIN GORDONS 70CL",
+"MARTINI BLANC 1LT",
+"MARTINI ROUGE 1LT",
+"RHUM 3 RIVIERES BLANC 70CL",
+"RHUM CAPTAIN MORGAN GOLD 70CL",
+"RHUM CAPTAIN MORGAN WHITE 70CL",
+"TEQUILA CUERVO SILVER 70CL",
+"VODKA SMIRNOFF 70CL",
+"KAHLUA 70CL",
+"GET 27 1LT",
+"GIFFARD CASSIS 1LT",
+"CREME DE MURE"
+],
+
+"THE & INFUSIONS": [
+"THE EARL GREY X24",
+"THE BREAKFAST X24",
+"THE DARJEELING X24",
+"THE CEYLAN X24",
+"THE VANILLE X24",
+"THE ROOIBOS X24",
+"INFUSION CITRON GINGEMBRE",
+"INFUSION FRAMBOISE MENTHE"
+]
+
 };
 
 let filtre = false;
-const container = document.getElementById("contenu");
+const app = document.getElementById("app");
 
-for (const categorie in data) {
+for (const cat in data) {
   const h2 = document.createElement("h2");
-  h2.textContent = categorie;
-  container.appendChild(h2);
+  h2.textContent = cat;
+  app.appendChild(h2);
 
   const table = document.createElement("table");
   table.innerHTML = `
@@ -119,11 +222,11 @@ for (const categorie in data) {
     </thead>
     <tbody></tbody>
   `;
-  container.appendChild(table);
+  app.appendChild(table);
 
   const tbody = table.querySelector("tbody");
 
-  data[categorie].forEach(p => {
+  data[cat].forEach(p => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${p}</td>
@@ -139,12 +242,9 @@ for (const categorie in data) {
 function calculer() {
   document.querySelectorAll("tbody tr").forEach(tr => {
     const i = tr.querySelectorAll("input");
-    const stock = +i[0].value;
-    const ventes = +i[1].value;
-    const seuil = +i[2].value;
-    const aCommander = Math.max(0, ventes + seuil - stock);
-    tr.querySelector(".commande").textContent = aCommander;
-    tr.style.display = aCommander > 0 || !filtre ? "" : "none";
+    const a = Math.max(0, (+i[1].value + +i[2].value) - +i[0].value);
+    tr.querySelector(".commande").textContent = a;
+    tr.style.display = a > 0 || !filtre ? "" : "none";
   });
 }
 
@@ -158,4 +258,3 @@ document.addEventListener("input", calculer);
 
 </body>
 </html>
-
