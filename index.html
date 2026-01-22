@@ -50,16 +50,15 @@ input {
 
 <script>
 // =========================
-// PRODUITS AVEC CONDITIONNEMENT
+// PRODUITS + CONDITIONNEMENT
 // =========================
 const data = {
-
 "FÛTS": [
   { nom: "FUT 30 LT SAINT OMER", cond: "30L" },
   { nom: "FUT 20 LT GOUDALE BLANC", cond: "20L" },
   { nom: "FUT 20 LT GOUDALE IPA", cond: "20L" },
   { nom: "FUT 20 LT LIMONADE GOUDALE", cond: "20L" },
-  { nom: "TUBE CO2", cond: "10 KG" }
+  { nom: "TUBE CO2 10KG", cond: "10 KG" }
 ],
 
 "VINS & BULLES": [
@@ -97,7 +96,7 @@ const data = {
   { nom: "ACQUA PANNA", cond: "75CL X12" }
 ],
 
-"JUS / SIROPS / AUTRES": [
+"AUTRES": [
   { nom: "A.MILLIAT (TOUS)", cond: "BOUTEILLE" },
   { nom: "BRIQUES (TOUTES)", cond: "1L X8" },
   { nom: "MONIN (TOUS)", cond: "1L / 70CL" },
@@ -116,7 +115,6 @@ const data = {
 // RÈGLES DE COMMANDE
 // =========================
 function quantiteAuto(nom) {
-
   if (nom.includes("SAINT OMER")) return 24;
   if (nom.includes("GOUDALE BLANC")) return 15;
   if (nom.includes("GOUDALE IPA")) return 15;
@@ -129,7 +127,7 @@ function quantiteAuto(nom) {
   if (nom.includes("CHARDONNAY")) return 35;
   if (nom.includes("CHABLIS")) return 15;
   if (nom.includes("TERRIENNE")) return 10;
-  if (nom.includes("LOUP BERGERIE ROUGE")) return 20;
+  if (nom.includes("LOUP BERGERIE ROUGE")) return 2;
   if (nom.includes("SANS CHICHI")) return 6;
 
   if (nom.includes("GIN")) return 6;
@@ -153,7 +151,7 @@ function quantiteAuto(nom) {
   if (nom.includes("ACQUA PANNA")) return 2;
 
   if (nom.includes("A.MILLIAT")) return 1;
-  if (nom.includes("BRIQUE")) return 2;
+  if (nom.includes("BRIQUES")) return 2;
   if (nom.includes("MONIN")) return 1;
   if (nom.includes("INFUSION CITRON")) return 2;
   if (nom.includes("INFUSION FRAMBOISE")) return 1;
@@ -197,21 +195,26 @@ for (const cat in data) {
     tr.innerHTML = `
       <td>${p.nom}</td>
       <td>${p.cond}</td>
-      <td><input type="number" value="0" min="0"></td>
+      <td><input type="number" min="0" value="0"></td>
       <td class="commande">0</td>
     `;
     tbody.appendChild(tr);
   });
 }
 
-document.addEventListener("input", () => {
+function calculer() {
   document.querySelectorAll("tbody tr").forEach(tr => {
     const nom = tr.children[0].textContent;
-    const stock = Number(tr.querySelector("input").value) || 0;
+    const stock = Number(tr.querySelector("input").value);
     const qte = stock === 0 ? quantiteAuto(nom) : 0;
     tr.querySelector(".commande").textContent = qte;
   });
-});
+}
+
+// recalcul à chaque saisie
+document.addEventListener("input", calculer);
+// calcul au chargement
+calculer();
 </script>
 
 </body>
