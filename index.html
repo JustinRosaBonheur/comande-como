@@ -32,8 +32,14 @@ th, td {
 }
 th { background: #eee; }
 td:first-child { text-align: left; }
-input { width: 60px; text-align: center; }
-.commande { font-weight: bold; color: #c00000; }
+input {
+  width: 60px;
+  text-align: center;
+}
+.commande {
+  font-weight: bold;
+  color: #c00000;
+}
 </style>
 </head>
 
@@ -44,131 +50,118 @@ input { width: 60px; text-align: center; }
 
 <script>
 // =========================
-// PRODUITS (LISTE COMPLÈTE)
+// PRODUITS AVEC CONDITIONNEMENT
 // =========================
 const data = {
+
 "FÛTS": [
-"FUT 30 LT SAINT OMER",
-"FUT 20 LT GOUDALE BLANC",
-"FUT 20 LT GOUDALE IPA",
-"FUT 20 LT LIMONADE GOUDALE",
-"TUBE CO2 10KG"
+  { nom: "FUT 30 LT SAINT OMER", cond: "30L" },
+  { nom: "FUT 20 LT GOUDALE BLANC", cond: "20L" },
+  { nom: "FUT 20 LT GOUDALE IPA", cond: "20L" },
+  { nom: "FUT 20 LT LIMONADE GOUDALE", cond: "20L" },
+  { nom: "TUBE CO2", cond: "10 KG" }
 ],
 
 "VINS & BULLES": [
-"CHAMPAGNE H BEAUGRAND",
-"PROSECCO RICCADONNA",
-"PIVE ROSE DOMAINE",
-"CHARDONNAY",
-"CHABLIS",
-"LA TERRIENNE BLANC",
-"LOUP BERGERIE ROUGE",
-"SANS CHICHI ROUGE"
+  { nom: "CHAMPAGNE H BEAUGRAND", cond: "75CL X6" },
+  { nom: "PROSECCO RICCADONNA", cond: "75CL X6" },
+  { nom: "PIVE ROSE DOMAINE", cond: "75CL" },
+  { nom: "CHARDONNAY", cond: "75CL" },
+  { nom: "CHABLIS", cond: "75CL" },
+  { nom: "LA TERRIENNE BLANC", cond: "75CL" },
+  { nom: "LOUP BERGERIE ROUGE", cond: "75CL" },
+  { nom: "SANS CHICHI ROUGE", cond: "75CL" }
 ],
 
 "ALCOOLS FORTS": [
-"GIN GORDONS",
-"RHUM 3 RIVIERES",
-"CAPTAIN MORGAN GOLD",
-"CAPTAIN MORGAN BLANC",
-"VODKA SMIRNOFF",
-"GET 27",
-"JOHNNIE WALKER RED",
-"ABSOLUT"
+  { nom: "GIN GORDONS", cond: "70CL" },
+  { nom: "RHUM 3 RIVIERES", cond: "70CL" },
+  { nom: "CAPTAIN MORGAN GOLD", cond: "70CL" },
+  { nom: "CAPTAIN MORGAN BLANC", cond: "70CL" },
+  { nom: "VODKA SMIRNOFF", cond: "70CL" },
+  { nom: "GET 27", cond: "1L" },
+  { nom: "JOHNNIE WALKER RED", cond: "70CL" },
+  { nom: "ABSOLUT", cond: "70CL" }
 ],
 
 "SOFTS": [
-"CARLSBERG",
-"COCA COLA",
-"COCA ZERO",
-"EAU NEUVE",
-"ICE TEA",
-"PERRIER 75CL",
-"PERRIER 33CL",
-"RED BULL",
-"SAN PELLEGRINO",
-"ACQUA PANNA"
+  { nom: "CARLSBERG", cond: "33CL X24" },
+  { nom: "COCA COLA", cond: "33CL X24" },
+  { nom: "COCA ZERO", cond: "33CL X24" },
+  { nom: "EAU NEUVE", cond: "50CL X12" },
+  { nom: "ICE TEA", cond: "33CL X24" },
+  { nom: "PERRIER 75CL", cond: "X12" },
+  { nom: "PERRIER 33CL", cond: "X24" },
+  { nom: "RED BULL", cond: "25CL X24" },
+  { nom: "SAN PELLEGRINO", cond: "75CL X12" },
+  { nom: "ACQUA PANNA", cond: "75CL X12" }
 ],
 
-"JUS & SIROPS": [
-"A.MILLIAT ORANGE",
-"A.MILLIAT POMME",
-"A.MILLIAT PECHE",
-"A.MILLIAT MANGUE",
-"BRIQUE ORANGE",
-"BRIQUE POMME",
-"MONIN FRAISE",
-"MONIN VANILLE",
-"MONIN CARAMEL"
-],
-
-"AUTRES": [
-"INFUSION CITRON GINGEMBRE",
-"INFUSION FRAMBOISE MENTHE",
-"LDP PARIS GINGER BEER",
-"MARTINI BLANC",
-"MARTINI ROUGE",
-"JADE",
-"SUCRE BUCHETTES",
-"CAFE GOURMET"
+"JUS / SIROPS / AUTRES": [
+  { nom: "A.MILLIAT (TOUS)", cond: "BOUTEILLE" },
+  { nom: "BRIQUES (TOUTES)", cond: "1L X8" },
+  { nom: "MONIN (TOUS)", cond: "1L / 70CL" },
+  { nom: "INFUSION CITRON GINGEMBRE", cond: "X24" },
+  { nom: "INFUSION FRAMBOISE MENTHE", cond: "X24" },
+  { nom: "LDP PARIS GINGER BEER BIO", cond: "75CL" },
+  { nom: "MARTINI BLANC", cond: "1L" },
+  { nom: "MARTINI ROUGE", cond: "1L" },
+  { nom: "JADE", cond: "25CL X24" },
+  { nom: "SUCRE BUCHETTES", cond: "600 PCS" },
+  { nom: "CAFE GOURMET", cond: "1 KG" }
 ]
 };
 
 // =========================
 // RÈGLES DE COMMANDE
 // =========================
-function regleCommande(produit) {
+function quantiteAuto(nom) {
 
-  // FÛTS
-  if (produit.includes("SAINT OMER")) return 24;
-  if (produit.includes("GOUDALE BLANC")) return 15;
-  if (produit.includes("GOUDALE IPA")) return 15;
-  if (produit.includes("LIMONADE GOUDALE")) return 4;
-  if (produit.includes("CO2")) return 3;
+  if (nom.includes("SAINT OMER")) return 24;
+  if (nom.includes("GOUDALE BLANC")) return 15;
+  if (nom.includes("GOUDALE IPA")) return 15;
+  if (nom.includes("LIMONADE GOUDALE")) return 4;
+  if (nom.includes("CO2")) return 3;
 
-  // BULLES & VINS
-  if (produit.includes("BEAUGRAND")) return 6;
-  if (produit.includes("PROSECCO")) return 15;
-  if (produit.includes("PIVE ROSE")) return 30;
-  if (produit.includes("CHARDONNAY")) return 35;
-  if (produit.includes("CHABLIS")) return 15;
-  if (produit.includes("TERRIENNE")) return 10;
-  if (produit.includes("LOUP BERGERIE ROUGE")) return 2;
-  if (produit.includes("SANS CHICHI")) return 6;
+  if (nom.includes("BEAUGRAND")) return 6;
+  if (nom.includes("PROSECCO")) return 15;
+  if (nom.includes("PIVE ROSE")) return 30;
+  if (nom.includes("CHARDONNAY")) return 35;
+  if (nom.includes("CHABLIS")) return 15;
+  if (nom.includes("TERRIENNE")) return 10;
+  if (nom.includes("LOUP BERGERIE ROUGE")) return 20;
+  if (nom.includes("SANS CHICHI")) return 6;
 
-  // ALCOOLS
-  if (produit.includes("GIN")) return 6;
-  if (produit.includes("3 RIVIERES")) return 6;
-  if (produit.includes("CAPTAIN MORGAN GOLD")) return 10;
-  if (produit.includes("CAPTAIN MORGAN BLANC")) return 10;
-  if (produit.includes("SMIRNOFF")) return 10;
-  if (produit.includes("GET 27")) return 4;
-  if (produit.includes("JOHNNIE")) return 6;
-  if (produit.includes("ABSOLUT")) return 5;
+  if (nom.includes("GIN")) return 6;
+  if (nom.includes("3 RIVIERES")) return 6;
+  if (nom.includes("CAPTAIN MORGAN GOLD")) return 10;
+  if (nom.includes("CAPTAIN MORGAN BLANC")) return 10;
+  if (nom.includes("SMIRNOFF")) return 10;
+  if (nom.includes("GET 27")) return 4;
+  if (nom.includes("JOHNNIE")) return 6;
+  if (nom.includes("ABSOLUT")) return 5;
 
-  // SOFTS
-  if (produit.includes("CARLSBERG")) return 8;
-  if (produit.includes("COCA COLA")) return 20;
-  if (produit.includes("COCA ZERO")) return 20;
-  if (produit.includes("EAU NEUVE")) return 15;
-  if (produit.includes("ICE TEA")) return 4;
-  if (produit.includes("PERRIER 75")) return 7;
-  if (produit.includes("PERRIER 33")) return 15;
-  if (produit.includes("RED BULL")) return 12;
-  if (produit.includes("SAN PELLEGRINO")) return 2;
-  if (produit.includes("ACQUA PANNA")) return 2;
+  if (nom.includes("CARLSBERG")) return 8;
+  if (nom.includes("COCA COLA")) return 20;
+  if (nom.includes("COCA ZERO")) return 20;
+  if (nom.includes("EAU NEUVE")) return 15;
+  if (nom.includes("ICE TEA")) return 4;
+  if (nom.includes("PERRIER 75")) return 7;
+  if (nom.includes("PERRIER 33")) return 15;
+  if (nom.includes("RED BULL")) return 12;
+  if (nom.includes("SAN PELLEGRINO")) return 2;
+  if (nom.includes("ACQUA PANNA")) return 2;
 
-  // RÈGLES GÉNÉRALES
-  if (produit.includes("A.MILLIAT")) return 1;
-  if (produit.includes("BRIQUE")) return 2;
-  if (produit.includes("MONIN")) return 1;
-  if (produit.includes("INFUSION CITRON")) return 2;
-  if (produit.includes("INFUSION FRAMBOISE")) return 1;
-  if (produit.includes("GINGER BEER")) return 4;
-  if (produit.includes("MARTINI")) return 1;
-  if (produit.includes("JADE")) return 2;
-  if (produit.includes("SUCRE")) return 2;
-  if (produit.includes("CAFE")) return 4;
+  if (nom.includes("A.MILLIAT")) return 1;
+  if (nom.includes("BRIQUE")) return 2;
+  if (nom.includes("MONIN")) return 1;
+  if (nom.includes("INFUSION CITRON")) return 2;
+  if (nom.includes("INFUSION FRAMBOISE")) return 1;
+  if (nom.includes("GINGER BEER")) return 4;
+  if (nom.includes("MARTINI")) return 1;
+  if (nom.includes("JADE")) return 2;
+  if (nom.includes("SUCRE")) return 2;
+  if (nom.includes("CAFE")) return 4;
 
   return 0;
 }
@@ -188,6 +181,7 @@ for (const cat in data) {
     <thead>
       <tr>
         <th>Produit</th>
+        <th>Conditionnement</th>
         <th>Stock</th>
         <th>À commander</th>
       </tr>
@@ -201,7 +195,8 @@ for (const cat in data) {
   data[cat].forEach(p => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
-      <td>${p}</td>
+      <td>${p.nom}</td>
+      <td>${p.cond}</td>
       <td><input type="number" value="0" min="0"></td>
       <td class="commande">0</td>
     `;
@@ -211,9 +206,9 @@ for (const cat in data) {
 
 document.addEventListener("input", () => {
   document.querySelectorAll("tbody tr").forEach(tr => {
-    const produit = tr.children[0].textContent;
+    const nom = tr.children[0].textContent;
     const stock = Number(tr.querySelector("input").value) || 0;
-    const qte = stock === 0 ? regleCommande(produit) : 0;
+    const qte = stock === 0 ? quantiteAuto(nom) : 0;
     tr.querySelector(".commande").textContent = qte;
   });
 });
