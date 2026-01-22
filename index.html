@@ -36,7 +36,7 @@ th {
   background: #eee;
 }
 input {
-  width: 60px;
+  width: 70px;
 }
 .commande {
   font-weight: bold;
@@ -107,23 +107,26 @@ const data = {
 };
 
 // =========================
-// RÈGLES DE COMMANDE AUTO
+// STOCK CIBLE (RÈGLES)
 // =========================
-const commandesAuto = {
+const stockCible = {
+  // FÛTS
   "FUT 30L SAINT OMER": 24,
   "FUT 20L GOUDALE BLANC": 15,
   "FUT 20L GOUDALE IPA": 15,
   "FUT 20L LIMONADE GOUDALE": 4,
   "TUBE CO2 10KG": 3,
 
+  // BULLES & VINS
   "CHAMPAGNE H BEAUGRAND": 6,
   "PROSECCO RICCADONNA": 15,
-
   "PIVE ROSE DOMAINE": 30,
   "CHARDONNAY": 35,
   "CHABLIS": 15,
   "LA TERRIENNE BLANC": 10,
+  "LOUP BERGERIE ROUGE": 2,
 
+  // ALCOOLS FORTS
   "GIN GORDONS": 6,
   "RHUM 3 RIVIERES": 6,
   "CAPTAIN MORGAN GOLD": 10,
@@ -131,6 +134,7 @@ const commandesAuto = {
   "VODKA SMIRNOFF": 10,
   "GET 27": 4,
 
+  // SOFTS
   "CARLSBERG": 8,
   "COCA COLA": 20,
   "COCA ZERO": 20,
@@ -138,13 +142,11 @@ const commandesAuto = {
   "ICE TEA": 4,
   "PERRIER 75CL": 7,
   "PERRIER 33CL": 15,
-  "RED BULL": 12,
-
-  "LOUP BERGERIE ROUGE": 2
+  "RED BULL": 12
 };
 
 // =========================
-// GÉNÉRATION DE L'APP
+// GÉNÉRATION DE L'INTERFACE
 // =========================
 let filtre = false;
 const app = document.getElementById("app");
@@ -159,7 +161,7 @@ for (const cat in data) {
     <thead>
       <tr>
         <th>Produit</th>
-        <th>Stock</th>
+        <th>Stock actuel</th>
         <th>À commander</th>
       </tr>
     </thead>
@@ -181,7 +183,7 @@ for (const cat in data) {
 }
 
 // =========================
-// CALCUL
+// CALCUL INTELLIGENT
 // =========================
 function calculer() {
   document.querySelectorAll("tbody tr").forEach(tr => {
@@ -189,8 +191,8 @@ function calculer() {
     const stock = +tr.querySelector("input").value;
 
     let aCommander = 0;
-    if (stock === 0 && commandesAuto[produit]) {
-      aCommander = commandesAuto[produit];
+    if (stockCible[produit] !== undefined) {
+      aCommander = Math.max(0, stockCible[produit] - stock);
     }
 
     tr.querySelector(".commande").textContent = aCommander;
