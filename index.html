@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TEST COMO NOUVELLE VERSION</title>
+<title>Commande COMO</title>
 
 <style>
 body {
@@ -59,148 +59,93 @@ button {
 <div id="app"></div>
 
 <script>
+// =========================
+// PRODUITS PAR CATÉGORIE
+// =========================
 const data = {
 
-"JUS": [
-"A.MILLIAT CITRONNADE GINGEMBRE",
-"A.MILLIAT FRAISE 33CLS VP X12",
-"A.MILLIAT JUS ORANGE 1LT VP X6",
-"A.MILLIAT JUS POMME 1LT VP X6",
-"A.MILLIAT MANGUE 33CLS VP X12",
-"A.MILLIAT ORANGE 33CLS VP X12",
-"A.MILLIAT PECHE JAUNE 1LT VP X6",
-"A.MILLIAT PECHE VIGNE 33CLS VP X12",
-"A.MILLIAT POMME COX 33CLS VP X12",
-"A.MILLIAT TOMATE CRIMEE 33CLS VP X12",
-"BRIQUE ANANAS 1LT X8",
-"BRIQUE MULTIFRUIT 1LT X8",
-"BRIQUE ORANGE 1LT X8",
-"BRIQUE PAMPLEMOUSSE 1LT X8",
-"BRIQUE POMME 1LT X8"
-],
-
-"SOFTS": [
-"ACQUA PANNA 75CLS X12",
-"AGUA CANA 70CL",
-"BITTER ANGOSTURA 20CLS",
-"BROOKLYN STONEWALL 33CLS X24",
-"CARAIBOS ORANGE 1LT X6",
-"CARAIBOS ANANAS 1LT X6",
-"CARAIBOS CRANBERRY 1LT X6",
-"CARAIBOS GOYAVE 1LT X6",
-"CARAIBOS PAMPLEMOUSSE 1LT X6",
-"CARAIBOS PINA COLADA 1LT X6",
-"CARAIBOS POMME 1LT X6",
-"CARAIBOS TOMATE 1LT X6",
-"CARLSBERG CLUB 33CLS X24",
-"CLUB MATE 33CLS",
-"COCA COLA 33CLS X24",
-"COCA ZERO 33CLS X24",
-"EAU PLATE TETRA 50CL X12",
-"FANTA ORANGE 33CLS X24",
-"FUZETEA PECHE 33CLS X24",
-"ICE TEA PECHE 33CLS X24",
-"LDP PARIS TONIC BIO 75CLS",
-"PERRIER 75CLS X12",
-"PERRIER 33CLS X24",
-"RED BULL 25CLS X24",
-"SAN PELLEGRINO 75CLS X12",
-"TROPICO 33CLS X24"
-],
-
-"VINS ROUGES": [
-"BEAUJOLAIS 75CL",
-"LA TERRIENNE ROUGE BIO 75CL X6",
-"LOUP BERGERIE ROUGE 75CL X12",
-"SANS CHICHI ROUGE 75CL X6"
-],
-
-"VINS BLANCS": [
-"CHABLIS LAROCHE 75CL X6",
-"LA TERRIENNE BLANC BIO 75CL X6",
-"SARDINE BLANC 75CL X6"
-],
-
-"VINS ROSÉS": [
-"LOUP BERGERIE ROSE 75CL X12",
-"PIVE ROSE MAGNUM 1.5L X3",
-"ROSE DE L'ETE 75CL X6",
-"ROSE DOMAINE PIVE 75CL X12",
-"ROSE DOMAINE PIVE 75CL X6",
-"ROSE PIVE CANETTE 25CLS X24"
+"FÛTS": [
+  "FUT 30L SAINT OMER",
+  "FUT 20L GOUDALE BLANC",
+  "FUT 20L GOUDALE IPA",
+  "FUT 20L LIMONADE GOUDALE",
+  "TUBE CO2 10KG"
 ],
 
 "CHAMPAGNE & BULLES": [
-"CHAMPAGNE H BEAUGRAND 75CL X6",
-"PROSECCO RICCADONNA 75CL X6",
-"PIVE BRUT PETILLANT 75CL X6",
-"PET NAT 75CL"
+  "CHAMPAGNE H BEAUGRAND",
+  "PROSECCO RICCADONNA"
 ],
 
-"SIROPS": [
-"MONIN FRAISE 1LT",
-"MONIN FRAMBOISE 1LT",
-"MONIN MANGUE 1LT",
-"MONIN PASSION 1LT",
-"MONIN CANNELLE 70CLS",
-"MONIN CARAMEL 70CLS",
-"MONIN CITRON JAUNE 1LT",
-"MONIN CITRON VERT 70CLS",
-"MONIN GRENADINE 1LT",
-"MONIN KIWI 70CLS",
-"MONIN MELON 1LT",
-"MONIN MIEL 70CLS",
-"MONIN NOISETTE 70CLS",
-"MONIN ORGEAT 1LT",
-"MONIN PECHE 1LT",
-"MONIN VANILLE 70CLS",
-"MONIN VIOLETTE 70CLS",
-"MONIN SUCRE DE CANNE 1LT",
-"SIROP PECHE GUIOT 1LT"
-],
-
-"FÛTS": [
-"FUT 20L 1664 BLANC",
-"FUT 20L GINGER",
-"FUT 20L GOUDALE BLANC",
-"FUT 20L GOUDALE IPA",
-"FUT 20L LIMONADE GOUDALE",
-"FUT 20L PARISCOLA",
-"FUT 20L TONIC BIO",
-"FUT 30L LIMONADE ROXANNE",
-"FUT 30L SAINT OMER",
-"FUT 6L HOEGAARDEN",
-"TUBE CO2 10KG"
+"VINS": [
+  "PIVE ROSE DOMAINE",
+  "CHARDONNAY",
+  "CHABLIS",
+  "LA TERRIENNE BLANC",
+  "LOUP BERGERIE ROUGE"
 ],
 
 "ALCOOLS FORTS": [
-"GIN GORDONS 70CL",
-"MARTINI BLANC 1LT",
-"MARTINI ROUGE 1LT",
-"RHUM 3 RIVIERES BLANC 70CL",
-"RHUM CAPTAIN MORGAN GOLD 70CL",
-"RHUM CAPTAIN MORGAN WHITE 70CL",
-"TEQUILA CUERVO SILVER 70CL",
-"VODKA SMIRNOFF 70CL",
-"KAHLUA 70CL",
-"GET 27 1LT",
-"GIFFARD CASSIS 1LT",
-"CREME DE MURE"
+  "GIN GORDONS",
+  "RHUM 3 RIVIERES",
+  "CAPTAIN MORGAN GOLD",
+  "CAPTAIN MORGAN BLANC",
+  "VODKA SMIRNOFF",
+  "GET 27"
 ],
 
-"THE & INFUSIONS": [
-"THE EARL GREY X24",
-"THE BREAKFAST X24",
-"THE DARJEELING X24",
-"THE CEYLAN X24",
-"THE VANILLE X24",
-"THE ROOIBOS X24",
-"INFUSION CITRON GINGEMBRE",
-"INFUSION FRAMBOISE MENTHE"
+"SOFTS": [
+  "CARLSBERG",
+  "COCA COLA",
+  "COCA ZERO",
+  "EAU NEUVE",
+  "ICE TEA",
+  "PERRIER 75CL",
+  "PERRIER 33CL",
+  "RED BULL"
 ]
-
 };
 
+// =========================
+// RÈGLES DE COMMANDE AUTO
+// =========================
+const commandesAuto = {
+  "FUT 30L SAINT OMER": 24,
+  "FUT 20L GOUDALE BLANC": 15,
+  "FUT 20L GOUDALE IPA": 15,
+  "FUT 20L LIMONADE GOUDALE": 4,
+  "TUBE CO2 10KG": 3,
+
+  "CHAMPAGNE H BEAUGRAND": 6,
+  "PROSECCO RICCADONNA": 15,
+
+  "PIVE ROSE DOMAINE": 30,
+  "CHARDONNAY": 35,
+  "CHABLIS": 15,
+  "LA TERRIENNE BLANC": 10,
+
+  "GIN GORDONS": 6,
+  "RHUM 3 RIVIERES": 6,
+  "CAPTAIN MORGAN GOLD": 10,
+  "CAPTAIN MORGAN BLANC": 10,
+  "VODKA SMIRNOFF": 10,
+  "GET 27": 4,
+
+  "CARLSBERG": 8,
+  "COCA COLA": 20,
+  "COCA ZERO": 20,
+  "EAU NEUVE": 15,
+  "ICE TEA": 4,
+  "PERRIER 75CL": 7,
+  "PERRIER 33CL": 15,
+  "RED BULL": 12,
+
+  "LOUP BERGERIE ROUGE": 2
+};
+
+// =========================
+// GÉNÉRATION DE L'APP
+// =========================
 let filtre = false;
 const app = document.getElementById("app");
 
@@ -215,8 +160,6 @@ for (const cat in data) {
       <tr>
         <th>Produit</th>
         <th>Stock</th>
-        <th>Ventes</th>
-        <th>Seuil</th>
         <th>À commander</th>
       </tr>
     </thead>
@@ -230,21 +173,28 @@ for (const cat in data) {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${p}</td>
-      <td><input type="number" value="0"></td>
-      <td><input type="number" value="0"></td>
-      <td><input type="number" value="0"></td>
+      <td><input type="number" value="0" min="0"></td>
       <td class="commande">0</td>
     `;
     tbody.appendChild(tr);
   });
 }
 
+// =========================
+// CALCUL
+// =========================
 function calculer() {
   document.querySelectorAll("tbody tr").forEach(tr => {
-    const i = tr.querySelectorAll("input");
-    const a = Math.max(0, (+i[1].value + +i[2].value) - +i[0].value);
-    tr.querySelector(".commande").textContent = a;
-    tr.style.display = a > 0 || !filtre ? "" : "none";
+    const produit = tr.children[0].textContent.trim();
+    const stock = +tr.querySelector("input").value;
+
+    let aCommander = 0;
+    if (stock === 0 && commandesAuto[produit]) {
+      aCommander = commandesAuto[produit];
+    }
+
+    tr.querySelector(".commande").textContent = aCommander;
+    tr.style.display = aCommander > 0 || !filtre ? "" : "none";
   });
 }
 
