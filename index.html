@@ -12,11 +12,9 @@ body {
   margin: 0;
   padding: 10px;
 }
-
 h1 {
   text-align: center;
 }
-
 h2 {
   background: #222;
   color: #fff;
@@ -24,40 +22,33 @@ h2 {
   margin-top: 25px;
   font-size: 16px;
 }
-
 button {
   width: 100%;
   padding: 12px;
   font-size: 16px;
   margin: 10px 0;
 }
-
 table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   background: white;
 }
-
 th, td {
   padding: 8px;
   border-bottom: 1px solid #ddd;
   text-align: center;
 }
-
 th {
   background: #eee;
 }
-
 td:first-child {
   text-align: left;
 }
-
 input {
   width: 60px;
   text-align: center;
 }
-
 .commande {
   font-weight: bold;
   color: #c00000;
@@ -74,29 +65,88 @@ input {
 
 <script>
 // =========================
-// PRODUITS (TOUS AFFICHÉS)
+// TOUS LES PRODUITS COMO
 // =========================
 const data = {
 
 "FÛTS": [
-  "FUT 30L SAINT OMER",
-  "FUT 20L GOUDALE BLANC",
-  "FUT 20L GOUDALE IPA",
-  "FUT 20L LIMONADE GOUDALE",
+  "FUT 20 LT 1664 BLANC",
+  "FUT 20 LT GINGER",
+  "FUT 20 LT GOUDALE BLANC",
+  "FUT 20 LT GOUDALE IPA",
+  "FUT 20 LT LIMONADE GOUDALE",
+  "FUT 20 LT PARISCOLA",
+  "FUT 20 LT TONIC BIO",
+  "FUT 30 LT LIMONADE ROXANNE",
+  "FUT 30 LT SAINT OMER",
+  "FUT 6 LT HOEGAARDEN",
   "TUBE CO2 10KG"
+],
+
+"SOFTS": [
+  "ACQUA PANNA 75CLS",
+  "AGUA CANA 70CL",
+  "BROOKLYN STONEWALL 33CLS",
+  "CARLSBERG CLUB 33CLS",
+  "CLUB MATE 33CLS",
+  "COCA COLA 33CLS",
+  "COCA ZERO 33CLS",
+  "EAU NEUVE PLATE 50CL",
+  "FANTA ORANGE 33CLS",
+  "FUZETEA PECHE 33CLS",
+  "ICE TEA PECHE 33CLS",
+  "LDP PARIS TONIC BIO 75CL",
+  "PERRIER 75CLS",
+  "PERRIER 33CLS",
+  "RED BULL 25CLS",
+  "SAN PELLEGRINO 75CLS",
+  "TROPICO 33CLS"
+],
+
+"JUS": [
+  "A.MILLIAT CITRONNADE GINGEMBRE",
+  "A.MILLIAT FRAISE 33CLS",
+  "A.MILLIAT JUS ORANGE 1LT",
+  "A.MILLIAT JUS POMME 1LT",
+  "A.MILLIAT MANGUE 33CLS",
+  "A.MILLIAT ORANGE 33CLS",
+  "A.MILLIAT PECHE JAUNE 1LT",
+  "A.MILLIAT PECHE VIGNE 33CLS",
+  "A.MILLIAT POMME COX 33CLS",
+  "A.MILLIAT TOMATE CRIMEE 33CLS",
+  "BRIQUE ANANAS 1LT",
+  "BRIQUE MULTIFRUIT 1LT",
+  "BRIQUE ORANGE 1LT",
+  "BRIQUE PAMPLEMOUSSE 1LT",
+  "BRIQUE POMME 1LT"
+],
+
+"VINS ROUGES": [
+  "BEAUJOLAIS",
+  "LA TERRIENNE ROUGE BIO",
+  "LOUP BERGERIE ROUGE",
+  "SANS CHICHI ROUGE"
+],
+
+"VINS BLANCS": [
+  "CHABLIS LAROCHE",
+  "LA TERRIENNE BLANC BIO",
+  "SARDINE BLANC"
+],
+
+"VINS ROSÉS": [
+  "LOUP BERGERIE ROSE",
+  "PIVE ROSE MAGNUM",
+  "ROSE DE L'ETE",
+  "ROSE DOMAINE PIVE",
+  "ROSE PIVE CANETTE"
 ],
 
 "CHAMPAGNE & BULLES": [
   "CHAMPAGNE H BEAUGRAND",
-  "PROSECCO RICCADONNA"
-],
-
-"VINS": [
-  "PIVE ROSE DOMAINE",
-  "CHARDONNAY",
-  "CHABLIS",
-  "LA TERRIENNE BLANC",
-  "LOUP BERGERIE ROUGE"
+  "PROSECCO RICCADONNA",
+  "PIVE BRUT",
+  "PET NAT"
 ],
 
 "ALCOOLS FORTS": [
@@ -105,49 +155,53 @@ const data = {
   "CAPTAIN MORGAN GOLD",
   "CAPTAIN MORGAN BLANC",
   "VODKA SMIRNOFF",
-  "GET 27"
+  "GET 27",
+  "KAHLUA",
+  "TRIPLE SEC"
 ],
 
-"SOFTS": [
-  "CARLSBERG",
-  "COCA COLA",
-  "COCA ZERO",
-  "EAU NEUVE",
-  "ICE TEA",
-  "PERRIER 75CL",
-  "PERRIER 33CL",
-  "RED BULL"
+"SIROPS": [
+  "MONIN FRAISE",
+  "MONIN FRAMBOISE",
+  "MONIN MANGUE",
+  "MONIN PASSION",
+  "MONIN CARAMEL",
+  "MONIN CITRON",
+  "MONIN GRENADINE",
+  "MONIN VANILLE"
 ],
 
-"AUTRES": [
-  "JUS",
-  "SIROPS",
-  "THÉS",
-  "DIVERS"
+"THES & INFUSIONS": [
+  "THE EARL GREY",
+  "THE BREAKFAST",
+  "THE DARJEELING",
+  "THE CEYLAN",
+  "THE VANILLE",
+  "THE ROOIBOS",
+  "INFUSION CITRON GINGEMBRE",
+  "INFUSION FRAMBOISE MENTHE"
 ]
 };
 
 // =========================
-// OBJECTIFS (CEUX QUE TU AS DONNÉS)
+// OBJECTIFS (SEULEMENT CEUX QUE TU VEUX CALCULER)
 // =========================
 const objectifs = {
-  // FÛTS
-  "FUT 30L SAINT OMER": 24,
-  "FUT 20L GOUDALE BLANC": 15,
-  "FUT 20L GOUDALE IPA": 15,
-  "FUT 20L LIMONADE GOUDALE": 4,
+  "FUT 30 LT SAINT OMER": 24,
+  "FUT 20 LT GOUDALE BLANC": 15,
+  "FUT 20 LT GOUDALE IPA": 15,
+  "FUT 20 LT LIMONADE GOUDALE": 4,
   "TUBE CO2 10KG": 3,
 
-  // BULLES & VINS
   "CHAMPAGNE H BEAUGRAND": 6,
   "PROSECCO RICCADONNA": 15,
+
   "PIVE ROSE DOMAINE": 30,
   "CHARDONNAY": 35,
-  "CHABLIS": 15,
-  "LA TERRIENNE BLANC": 10,
+  "CHABLIS LAROCHE": 15,
+  "LA TERRIENNE BLANC BIO": 10,
   "LOUP BERGERIE ROUGE": 2,
 
-  // ALCOOLS FORTS
   "GIN GORDONS": 6,
   "RHUM 3 RIVIERES": 6,
   "CAPTAIN MORGAN GOLD": 10,
@@ -155,15 +209,14 @@ const objectifs = {
   "VODKA SMIRNOFF": 10,
   "GET 27": 4,
 
-  // SOFTS
-  "CARLSBERG": 8,
-  "COCA COLA": 20,
-  "COCA ZERO": 20,
-  "EAU NEUVE": 15,
-  "ICE TEA": 4,
-  "PERRIER 75CL": 7,
-  "PERRIER 33CL": 15,
-  "RED BULL": 12
+  "CARLSBERG CLUB 33CLS": 8,
+  "COCA COLA 33CLS": 20,
+  "COCA ZERO 33CLS": 20,
+  "EAU NEUVE PLATE 50CL": 15,
+  "ICE TEA PECHE 33CLS": 4,
+  "PERRIER 75CLS": 7,
+  "PERRIER 33CLS": 15,
+  "RED BULL 25CLS": 12
 };
 
 // =========================
@@ -212,7 +265,6 @@ function calculer() {
     const stock = Number(tr.querySelector("input").value) || 0;
 
     let aCommander = 0;
-
     if (objectifs[produit] !== undefined) {
       aCommander = Math.max(0, objectifs[produit] - stock);
     }
